@@ -1,0 +1,53 @@
+#!/bin/zsh
+
+# create directory lab/
+# put script.txt in lab/
+# make script.txt executable
+# create directory name/ as subdirectory of lab/
+# place your program code in lab/name
+# cd to lab/
+# $ script.txt name
+
+echo "**********************************************************"
+echo "*****    Testing $1"
+echo "**********************************************************"
+
+cd $1
+echo "pwd"
+pwd
+echo "gcc -o my_kill my_kill.c"
+gcc -o my_kill my_kill.c
+
+echo "cp ../tiny.txt ."
+cp ../tiny.txt .
+echo "cp ../killme.c ."
+cp ../killme.c .
+echo "gcc -o killme killme.c"
+
+echo "**********************************************************"
+echo "% ./my_kill 89123"
+./my_kill 89123
+echo "**********************************************************"
+echo "% ./my_kill -h 89123"
+./my_kill -h 89123
+echo "**********************************************************"
+echo "% ./my_kill -h -f tiny.txt 89123"
+./my_kill -h -f tiny.txt 89123
+echo "**********************************************************"
+echo "% ./my_kill"
+./my_kill
+echo "**********************************************************"
+echo "% ./my_kill -h"
+./my_kill -h
+echo "**********************************************************"
+echo "% ./my_kill -h -f tiny.txt"
+./my_kill -h -f tiny.txt
+echo "**********************************************************"
+echo "% ./my_kill -x 89123"
+./my_kill -x 89123
+echo "**********************************************************"
+echo "% ./killme &"
+echo "% .my_kill $!"
+./killme &
+echo "% .my_kill $!"
+./my_kill $!
