@@ -1,0 +1,5 @@
+fork Terry 4 kernel_process
+fork Terry 4 kernel_process
+fork Terry 4 kernel_process
+kill Terry
+printprocs

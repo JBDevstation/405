@@ -1,0 +1,3 @@
+fork Mary 3 kernel_process
+kill Marry kernel_process
+printprocs

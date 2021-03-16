@@ -1,0 +1,2 @@
+fork Jerry -1 kernel_process
+printprocs kernel_process
