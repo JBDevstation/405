@@ -97,6 +97,13 @@ int balloc();
 void bfree(uint);
 struct inode *iget(uint);
 void print_inodes();
+
+
+void panic(char* message){
+    printf("%s\n", message);
+    exit(-1);
+}
+
 int main(int argc, char *argv[]) {
 
     unsigned char b[BSIZE];
@@ -179,14 +186,19 @@ int main(int argc, char *argv[]) {
 
         int fd4 = tfs_open("MyFile", TO_CREATE | TO_RDWR, 0);
         printf("fd4: %d\n", fd4);
-        s = tfs_write(fd4, "Writing data to my file. ZYXWVUTSRQPONMLKJIHGFED", 48);
+        s = tfs_write(fd4, "YOU FACE JARAXXUS, EREDOR LORD OF THE BURNING LEGION!", 53);
         printf("tfs_write bytes: %d\n", s);
 
+        int fd5 = tfs_open("MyFileTwoElectricBoogaloo", TO_CREATE | TO_RDWR, 0);
+        printf("fd5: %d\n", fd5);
+        s = tfs_write(fd5, "BEHOLD, THE MAGIC", 17);
+        printf("tfs_write bytes: %d\n", s);
 
         tfs_close(fd1);
         tfs_close(fd2);
         tfs_close(fd3);
         tfs_close(fd4);
+	tfs_close(fd5);
         
         // Write file info back to TDD and close TFS
         writefsinfo();
@@ -236,5 +248,6 @@ int main(int argc, char *argv[]) {
         printf("must enter bio with create, write, read\n");
         exit(1);
     }
+
     return 0;
 }

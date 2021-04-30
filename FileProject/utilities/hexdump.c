@@ -23,11 +23,14 @@
 int blocks = 10, start_block = 0;
 char filename[100];
 
-void panic();
+void panic(char* message){
+    printf("%s\n", message);
+    exit(-1);
+}
 
 int get_opts(int count, char *args[]) {
-    int opt, len, i, good = 1;
-    while (good && (opt = getopt(count, args, "s:l:")) != -1) {
+    int opt, len, i, good = 1, end = 0;
+    while (good && (opt = getopt(count, args, "s:l:e:")) != -1) {
         int len, i;
         switch (opt) {
             case 's':
@@ -41,6 +44,22 @@ int get_opts(int count, char *args[]) {
                 if (good)
                     start_block = atoi(optarg);
                 break;
+	    case 'e':
+		printf("In case E");
+		len = strlen(optarg);
+		for(i=0;i<len; i++){
+		    if(!isdigit(optarg[i])){
+		    	fprintf(stderr, "-e value must be number\n");
+			good = 0;
+			break;
+		    }
+		    if(good){
+		    	end = atoi(optarg);
+		    	blocks = end - start_block;
+			blocks++;
+		    }
+		    break;
+		}
             case 'l':
                 len = strlen(optarg);
                 for (i=0;i<len; i++)
